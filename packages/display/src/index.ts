@@ -1,5 +1,5 @@
-import baseManifest from 'tce-manifest';
-import type { ElementManifest } from 'tce-manifest';
+import baseManifest from '@tailor-cms/ce-modal-manifest';
+import type { ElementManifest } from '@tailor-cms/ce-modal-manifest';
 
 import Display from './components/Display.vue';
 
