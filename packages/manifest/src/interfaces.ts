@@ -1,6 +1,7 @@
 // Example counter component
 export interface ElementData {
-  count: number;
+  title: string | null;
+  embeds: Record<string, any>;
 }
 
 export interface Element {
@@ -29,6 +30,7 @@ export interface ElementManifest {
   version: string;
   name: string;
   ssr: boolean;
+  isComposite: boolean;
   initState: DataInitializer;
   Edit?: object;
   TopToolbar?: object;
