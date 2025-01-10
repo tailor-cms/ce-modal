@@ -38,6 +38,9 @@ importers:
 
   packages/display:
     dependencies:
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -48,6 +51,9 @@ importers:
       '@tailor-cms/eslint-config':
         specifier: 0.0.2
         version: 0.0.2(kwjg6bvyxkamsvavde6mxjk73q)
+      '@types/lodash':
+        specifier: ^4.17.6
+        version: 4.17.13
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.6.2(vite@4.5.2(@types/node@20.11.19)(sass@1.68.0))(vue@3.3.4)
@@ -63,6 +69,9 @@ importers:
 
   packages/edit:
     dependencies:
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -73,6 +82,9 @@ importers:
       '@tailor-cms/eslint-config':
         specifier: 0.0.2
         version: 0.0.2(kwjg6bvyxkamsvavde6mxjk73q)
+      '@types/lodash':
+        specifier: ^4.17.6
+        version: 4.17.13
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.6.2(vite@4.5.2(@types/node@20.11.19)(sass@1.68.0))(vue@3.3.4)
@@ -731,6 +743,9 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  '@types/lodash@4.17.13':
+    resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
 
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
@@ -4295,6 +4310,8 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
+
+  '@types/lodash@4.17.13': {}
 
   '@types/ms@0.7.34': {}
 
