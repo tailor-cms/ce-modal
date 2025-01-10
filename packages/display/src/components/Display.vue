@@ -1,6 +1,6 @@
 <template>
   <div class="tce-root text-center ma-4">
-    <VDialog>
+    <VDialog scrollable>
       <template #activator="{ props: activatorProps }">
         <VBtn v-bind="activatorProps">{{ data.title || 'Open Modal' }}</VBtn>
       </template>
