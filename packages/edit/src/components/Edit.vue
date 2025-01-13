@@ -20,7 +20,9 @@
         Click the button below to add content element.
       </VAlert>
       <TailorEmbeddedContainer
+        :allowed-element-config="embedElementConfig"
         :container="element.data"
+        :is-disabled="isDisabled"
         @delete="deleteEmbed($event)"
         @save="saveEmbed($event.embeds)"
       />
@@ -35,7 +37,12 @@ import cloneDeep from 'lodash/cloneDeep';
 import isEmpty from 'lodash/isEmpty';
 
 const emit = defineEmits(['save']);
-const props = defineProps<{ element: Element; isFocused: boolean }>();
+const props = defineProps<{
+  element: Element;
+  embedElementConfig: any[];
+  isFocused: boolean;
+  isDisabled: boolean;
+}>();
 
 const elementBus: any = inject('$elementBus');
 
