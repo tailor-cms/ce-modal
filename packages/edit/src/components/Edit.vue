@@ -1,42 +1,74 @@
 <template>
-  <div class="tce-container">
-    <div>This is Edit version of the content element id: {{ element?.id }}</div>
-    <div class="mt-6 mb-2">
-      Counter:
-      <span class="font-weight-bold">{{ element.data.count }}</span>
+  <VCard class="tce-modal my-2" color="grey-lighten-5">
+    <VToolbar class="px-4" color="primary-darken-3" height="36">
+      <VIcon
+        :icon="manifest.ui.icon"
+        color="secondary-lighten-2"
+        size="18"
+        start
+      />
+      <span class="text-subtitle-2">{{ manifest.name }}</span>
+    </VToolbar>
+    <div class="pa-6 text-center">
+      <VAlert
+        v-if="!hasElements"
+        color="primary-darken-2"
+        icon="mdi-information-variant"
+        variant="tonal"
+        prominent
+      >
+        Click the button below to add content element.
+      </VAlert>
+      <TailorEmbeddedContainer
+        :allowed-element-config="embedElementConfig"
+        :container="element.data"
+        :is-disabled="isDisabled"
+        @delete="deleteEmbed($event)"
+        @save="saveEmbed($event.embeds)"
+      />
     </div>
-    <button @click="increment">Increment</button>
-  </div>
+  </VCard>
 </template>
 
 <script lang="ts" setup>
-import { defineEmits, defineProps } from 'vue';
-import { Element } from 'tce-manifest';
+import { computed, defineEmits, defineProps, inject, reactive } from 'vue';
+import manifest, { Element, ElementData } from '@tailor-cms/ce-modal-manifest';
+import cloneDeep from 'lodash/cloneDeep';
+import isEmpty from 'lodash/isEmpty';
 
 const emit = defineEmits(['save']);
-const props = defineProps<{ element: Element; isFocused: boolean }>();
+const props = defineProps<{
+  element: Element;
+  embedElementConfig: any[];
+  isFocused: boolean;
+  isDisabled: boolean;
+}>();
 
-const increment = () => {
-  const { data } = props.element;
-  const count = data.count + 1;
-  emit('save', { ...data, count });
+const elementBus: any = inject('$elementBus');
+
+const elementData = reactive<ElementData>(cloneDeep(props.element.data));
+
+const saveEmbed = (embeds: any) => {
+  elementData.embeds = embeds;
+  emit('save', elementData);
 };
+
+const deleteEmbed = (embed: { id: string }) => {
+  delete elementData.embeds[embed.id];
+  emit('save', elementData);
+};
+
+const hasElements = computed(() => !isEmpty(props.element.data.embeds));
+
+elementBus.on('title', (title: string) => {
+  elementData.title = title;
+  emit('save', elementData);
+});
 </script>
 
 <style scoped>
-.tce-container {
-  background-color: transparent;
-  margin-top: 1rem;
-  padding: 1.5rem;
-  border: 2px dashed #888;
+.tce-modal {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
-}
-
-button {
-  margin: 1rem 0 0 0;
-  padding: 0.25rem 1rem;
-  background-color: #eee;
-  border: 1px solid #444;
 }
 </style>
