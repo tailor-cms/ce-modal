@@ -1,5 +1,11 @@
 # @tailor-cms/ce-modal-edit
 
+## 0.0.3
+
+### Patch Changes
+
+- Bumped to the latest tce-boot and core-components version and migrated code accordingly.
+
 ## 0.0.2
 
 ### Patch Changes
