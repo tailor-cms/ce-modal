@@ -74,7 +74,7 @@ export default {
   afterRetrieve,
   onUserInteraction,
   beforeDisplay,
-  ai
+  ai,
 };
 
 export { type, initState, ai };
