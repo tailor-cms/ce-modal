@@ -22,7 +22,7 @@
       <TailorEmbeddedContainer
         :allowed-element-config="embedElementConfig"
         :container="element.data"
-        :is-disabled="isDisabled"
+        :is-disabled="isReadonly"
         @delete="deleteEmbed($event)"
         @save="saveEmbed($event.embeds)"
       />
@@ -40,8 +40,9 @@ const emit = defineEmits(['save']);
 const props = defineProps<{
   element: Element;
   embedElementConfig: any[];
+  isDragged: boolean;
   isFocused: boolean;
-  isDisabled: boolean;
+  isReadonly: boolean;
 }>();
 
 const elementBus: any = inject('$elementBus');
