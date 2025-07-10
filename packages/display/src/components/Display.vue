@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-undef-components -->
 <template>
   <div class="tce-modal-root text-center ma-4">
     <VDialog max-width="600" scrollable>
