@@ -12,8 +12,8 @@
     <div class="pa-6 text-center">
       <VAlert
         v-if="!hasElements"
-        color="primary-darken-2"
-        icon="mdi-information-variant"
+        color="primary-darken-1"
+        icon="mdi-information-outline"
         variant="tonal"
         prominent
       >
