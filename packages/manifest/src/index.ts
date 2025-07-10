@@ -1,5 +1,6 @@
 import { OpenAISchema } from '@tailor-cms/cek-common';
 import { v4 as uuid } from 'uuid';
+
 import type {
   DataInitializer,
   ElementData,
@@ -58,9 +59,9 @@ export const ai = {
         paragraphs about the topic.
   `,
   processResponse: (val: any) => {
-    const questionId = uuid();
-    const question = {
-      id: questionId,
+    const embedId = uuid();
+    const embed = {
+      id: embedId,
       data: { content: val.content },
       embedded: true,
       position: 1,
@@ -68,7 +69,7 @@ export const ai = {
     };
     return {
       title: val.title,
-      embeds: { [questionId]: question },
+      embeds: { [embedId]: embed },
     };
   },
 };
