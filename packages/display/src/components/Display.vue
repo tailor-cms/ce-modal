@@ -2,7 +2,9 @@
   <div class="tce-root text-center ma-4">
     <VDialog scrollable>
       <template #activator="{ props: activatorProps }">
-        <VBtn v-bind="activatorProps">{{ data.title || 'Open Modal' }}</VBtn>
+        <VBtn v-bind="activatorProps">
+          {{ element.data.title || 'Open Modal' }}
+        </VBtn>
       </template>
       <template #default="{ isActive }">
         <VCard>
@@ -24,13 +26,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { ElementData } from '@tailor-cms/ce-modal-manifest';
-import sortBy from 'lodash/sortBy';
+import { Element } from '@tailor-cms/ce-modal-manifest';
+import { sortBy } from 'lodash-es';
 
-const props = defineProps<{ id: number; data: ElementData; userState: any }>();
+const props = defineProps<{ element: Element; userState: any }>();
 defineEmits(['interaction']);
 
-const embeds = computed(() => sortBy(props.data.embeds, 'position'));
+const embeds = computed(() => sortBy(props.element.data.embeds, 'position'));
 </script>
 
 <style scoped>
