@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-undef-components -->
 <template>
   <VCard class="tce-modal my-2" color="grey-lighten-5">
     <VToolbar class="px-4" color="primary-darken-2" height="36">
@@ -22,7 +23,7 @@
       <TailorEmbeddedContainer
         :allowed-element-config="embedElementConfig"
         :container="element.data"
-        :is-disabled="isDisabled"
+        :is-disabled="isReadonly"
         @delete="deleteEmbed($event)"
         @save="saveEmbed($event.embeds)"
       />
@@ -31,17 +32,17 @@
 </template>
 
 <script lang="ts" setup>
+import { cloneDeep, isEmpty } from 'lodash-es';
 import { computed, defineEmits, defineProps, inject, reactive } from 'vue';
 import manifest, { Element, ElementData } from '@tailor-cms/ce-modal-manifest';
-import cloneDeep from 'lodash/cloneDeep';
-import isEmpty from 'lodash/isEmpty';
 
 const emit = defineEmits(['save']);
 const props = defineProps<{
   element: Element;
   embedElementConfig: any[];
+  isDragged: boolean;
   isFocused: boolean;
-  isDisabled: boolean;
+  isReadonly: boolean;
 }>();
 
 const elementBus: any = inject('$elementBus');

@@ -1,14 +1,22 @@
+<!-- eslint-disable vue/no-undef-components -->
 <template>
-  <div class="tce-root text-center ma-4">
-    <VDialog scrollable>
+  <div class="tce-modal-root text-center ma-4">
+    <VDialog max-width="600" scrollable>
       <template #activator="{ props: activatorProps }">
-        <VBtn v-bind="activatorProps">{{ data.title || 'Open Modal' }}</VBtn>
+        <VBtn v-bind="activatorProps" color="primary-darken-1" rounded="md">
+          {{ element.data.title || 'Open Modal' }}
+        </VBtn>
       </template>
       <template #default="{ isActive }">
         <VCard>
-          <VCardActions>
-            <VBtn icon="mdi-close" @click="isActive.value = false" />
-          </VCardActions>
+          <VCardTitle class="d-flex justify-space-between align-center">
+            {{ element.data.title || 'Modal Content' }}
+            <VBtn
+              icon="mdi-close"
+              variant="text"
+              @click="isActive.value = false"
+            />
+          </VCardTitle>
           <VDivider />
           <VCardText>
             <VAlert v-if="!embeds.length" type="info" variant="tonal">
@@ -24,18 +32,16 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { ElementData } from '@tailor-cms/ce-modal-manifest';
-import sortBy from 'lodash/sortBy';
+import { Element } from '@tailor-cms/ce-modal-manifest';
+import { sortBy } from 'lodash-es';
 
-const props = defineProps<{ id: number; data: ElementData; userState: any }>();
+const props = defineProps<{ element: Element; userState: any }>();
 defineEmits(['interaction']);
 
-const embeds = computed(() => sortBy(props.data.embeds, 'position'));
+const embeds = computed(() => sortBy(props.element.data.embeds, 'position'));
 </script>
 
 <style scoped>
-.tce-root {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
+.tce-modal-root {
 }
 </style>

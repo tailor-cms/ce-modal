@@ -1,3 +1,6 @@
+import { OpenAISchema } from '@tailor-cms/cek-common';
+import { v4 as uuid } from 'uuid';
+
 import type {
   DataInitializer,
   ElementData,
@@ -29,6 +32,48 @@ const ui = {
   forceFullWidth: false,
 };
 
+export const ai = {
+  Schema: {
+    type: 'json_schema',
+    name: 'ce_modal',
+    schema: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        content: { type: 'string' },
+      },
+      required: ['title', 'content'],
+      additionalProperties: false,
+    },
+  } as OpenAISchema,
+  getPrompt: () => `
+    Generate a modal content element as an object with the following
+    properties:
+    {
+      "title": "",
+      "content": "",
+    }
+    where:
+      - 'title' is the title of the modal. Do not use more than 3 words.
+      - 'content' is the text to be displayed in the modal. Create few
+        paragraphs about the topic.
+  `,
+  processResponse: (val: any) => {
+    const embedId = uuid();
+    const embed = {
+      id: embedId,
+      data: { content: val.content },
+      embedded: true,
+      position: 1,
+      type: 'TIPTAP_HTML',
+    };
+    return {
+      title: val.title,
+      embeds: { [embedId]: embed },
+    };
+  },
+};
+
 const manifest: ElementManifest = {
   type,
   version: '1.0',
@@ -37,6 +82,7 @@ const manifest: ElementManifest = {
   isComposite: true,
   initState,
   ui,
+  ai,
 };
 
 export default manifest;
