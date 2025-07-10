@@ -33,8 +33,7 @@
 <script lang="ts" setup>
 import { computed, defineEmits, defineProps, inject, reactive } from 'vue';
 import manifest, { Element, ElementData } from '@tailor-cms/ce-modal-manifest';
-import cloneDeep from 'lodash/cloneDeep';
-import isEmpty from 'lodash/isEmpty';
+import { cloneDeep, isEmpty } from 'lodash-es';
 
 const emit = defineEmits(['save']);
 const props = defineProps<{
