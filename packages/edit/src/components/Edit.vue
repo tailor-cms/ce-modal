@@ -33,8 +33,8 @@
 
 <script lang="ts" setup>
 import { cloneDeep, isEmpty } from 'lodash-es';
-import { computed, defineEmits, defineProps, inject, reactive } from 'vue';
-import manifest, { Element, ElementData } from '@tailor-cms/ce-modal-manifest';
+import { computed, inject } from 'vue';
+import manifest, { Element } from '@tailor-cms/ce-modal-manifest';
 
 const emit = defineEmits(['save']);
 const props = defineProps<{
@@ -47,23 +47,22 @@ const props = defineProps<{
 
 const elementBus: any = inject('$elementBus');
 
-const elementData = reactive<ElementData>(cloneDeep(props.element.data));
-
 const saveEmbed = (embeds: any) => {
-  elementData.embeds = embeds;
-  emit('save', elementData);
+  const data = cloneDeep(props.element.data);
+  data.embeds = embeds;
+  emit('save', data);
 };
 
 const deleteEmbed = (embed: { id: string }) => {
-  delete elementData.embeds[embed.id];
-  emit('save', elementData);
+  const data = cloneDeep(props.element.data);
+  delete data.embeds[embed.id];
+  emit('save', data);
 };
 
 const hasElements = computed(() => !isEmpty(props.element.data.embeds));
 
 elementBus.on('title', (title: string) => {
-  elementData.title = title;
-  emit('save', elementData);
+  emit('save', { ...props.element.data, title });
 });
 </script>
 
