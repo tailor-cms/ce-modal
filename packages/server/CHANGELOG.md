@@ -1,5 +1,11 @@
 # @tailor-cms/ce-modal-server
 
+## 0.1.1
+
+### Patch Changes
+
+- Update data handling.
+
 ## 0.1.0
 
 ### Minor Changes
