@@ -22,6 +22,7 @@ Composite element that reveals embedded content in a dialog.
 - Renders a button that opens a scrollable dialog
 - Dialog shows the title and the embedded elements
 - Close button dismisses the dialog
+- Emits `interaction` event with `{ openedAt }` when the modal is opened
 
 ## Development
 
