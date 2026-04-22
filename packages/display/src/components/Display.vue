@@ -1,11 +1,16 @@
 <!-- eslint-disable vue/no-undef-components -->
 <template>
   <div class="tce-modal-root text-center ma-4">
-    <VDialog max-width="600" scrollable>
+    <VDialog v-model="isOpen" max-width="600" scrollable>
       <template #activator="{ props: activatorProps }">
-        <VBtn v-bind="activatorProps" color="primary-darken-1" rounded="md">
-          {{ element.data.title || 'Open Modal' }}
-        </VBtn>
+        <VBtn
+          v-bind="activatorProps"
+          :append-icon="viewed ? 'mdi-check' : undefined"
+          :text="element.data.title || 'Open Modal'"
+          :variant="viewed ? 'tonal' : 'flat'"
+          color="primary-darken-1"
+          rounded="md"
+        />
       </template>
       <template #default="{ isActive }">
         <VCard>
@@ -31,14 +36,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { Element } from '@tailor-cms/ce-modal-manifest';
 import { sortBy } from 'lodash-es';
 
 const props = defineProps<{ element: Element; userState: any }>();
-defineEmits(['interaction']);
+const emit = defineEmits<{ interaction: [data: { openedAt: number }] }>();
 
+const isOpen = ref(false);
+const viewed = computed(() => Boolean(props.userState?.openedAt));
 const embeds = computed(() => sortBy(props.element.data.embeds, 'position'));
+
+watch(isOpen, (open) => {
+  if (open) emit('interaction', { openedAt: Date.now() });
+});
 </script>
 
 <style scoped>

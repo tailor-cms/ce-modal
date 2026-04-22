@@ -8,7 +8,7 @@
         size="18"
         start
       />
-      <span class="text-subtitle-2">{{ manifest.name }}</span>
+      <span class="text-title-small">{{ manifest.name }}</span>
     </VToolbar>
     <div class="pa-6 text-center">
       <VAlert
@@ -36,7 +36,9 @@ import { cloneDeep, isEmpty } from 'lodash-es';
 import { computed, inject } from 'vue';
 import manifest, { Element } from '@tailor-cms/ce-modal-manifest';
 
-const emit = defineEmits(['save']);
+const emit = defineEmits<{
+  save: [data: Element['data']];
+}>();
 const props = defineProps<{
   element: Element;
   embedElementConfig: any[];
