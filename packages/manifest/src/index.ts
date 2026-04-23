@@ -74,9 +74,6 @@ export const ai: AiConfig = {
   },
 };
 
-export const isEmpty = (data: ElementData): boolean =>
-  !data.embeds || Object.keys(data.embeds).length === 0;
-
 const manifest: ElementManifest = {
   type,
   version: '1.0',
@@ -84,7 +81,6 @@ const manifest: ElementManifest = {
   ssr: false,
   isComposite: true,
   initState,
-  isEmpty,
   ui,
   ai,
 };

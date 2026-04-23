@@ -6,10 +6,10 @@
         <VBtn
           v-bind="activatorProps"
           :append-icon="viewed ? 'mdi-check' : undefined"
+          :color="viewed ? 'success' : 'primary'"
           :text="element.data.title || 'Open Modal'"
-          :variant="viewed ? 'tonal' : 'flat'"
-          color="primary-darken-1"
           rounded="md"
+          variant="tonal"
         />
       </template>
       <template #default="{ isActive }">
