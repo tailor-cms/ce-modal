@@ -30,14 +30,18 @@ test.describe('Button label', () => {
     const edit = new Edit(page);
     await edit.focus();
     await edit.buttonLabelInput.fill('Show details');
-    // Debounced save (500ms) — blur to force immediate persistence
-    await edit.buttonLabelInput.blur();
+    // Wait for the debounced save (500ms) to fire and persist
+    await page.waitForTimeout(700);
     await page.reload({ waitUntil: 'networkidle' });
     await edit.focus();
     await expect(edit.buttonLabelInput).toHaveValue('Show details');
   });
 });
 
-test.afterAll(async () => {
-  await elementClient.reset(ELEMENT_ID);
+test.describe('Readonly mode', () => {
+  test('Hides add-embed control', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.setReadonly();
+    await expect(edit.addEmbedBtn).not.toBeVisible();
+  });
 });

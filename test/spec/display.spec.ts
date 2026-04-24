@@ -7,6 +7,7 @@ const ELEMENT_ID = 'test-modal-display';
 
 test.beforeEach(async ({ page }) => {
   await elementClient.reset(ELEMENT_ID);
+  await elementClient.resetState(ELEMENT_ID);
   await page.goto(`/?id=${ELEMENT_ID}`);
   await page.waitForLoadState('networkidle');
 });
@@ -54,8 +55,4 @@ test.describe('With title set', () => {
     await display.closeBtn.click();
     await expect(display.activatorBtn.locator('.mdi-check')).toBeVisible();
   });
-});
-
-test.afterAll(async () => {
-  await elementClient.reset(ELEMENT_ID);
 });

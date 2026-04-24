@@ -5,6 +5,7 @@ export class Edit extends pom.EditPanel {
   readonly root: Locator;
   readonly buttonLabelInput: Locator;
   readonly emptyAlert: Locator;
+  readonly addEmbedBtn: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -13,5 +14,6 @@ export class Edit extends pom.EditPanel {
     this.emptyAlert = this.root.getByText(
       'Click the button below to add content element',
     );
+    this.addEmbedBtn = this.root.getByRole('button', { name: 'Add content' });
   }
 }

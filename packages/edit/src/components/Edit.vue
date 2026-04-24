@@ -23,7 +23,7 @@
       <TailorEmbeddedContainer
         :allowed-element-config="embedElementConfig"
         :container="element.data"
-        :is-disabled="isReadonly"
+        :is-readonly="isReadonly"
         @delete="deleteEmbed($event)"
         @save="saveEmbed($event.embeds)"
       />
