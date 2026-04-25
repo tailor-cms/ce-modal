@@ -1,4 +1,4 @@
-import { OpenAISchema } from '@tailor-cms/cek-common';
+import type { AiConfig } from '@tailor-cms/cek-common';
 import { v4 as uuid } from 'uuid';
 
 import type {
@@ -32,7 +32,7 @@ const ui = {
   forceFullWidth: false,
 };
 
-export const ai = {
+export const ai: AiConfig = {
   Schema: {
     type: 'json_schema',
     name: 'ce_modal',
@@ -45,7 +45,7 @@ export const ai = {
       required: ['title', 'content'],
       additionalProperties: false,
     },
-  } as OpenAISchema,
+  },
   getPrompt: () => `
     Generate a modal content element as an object with the following
     properties:
