@@ -27,6 +27,14 @@ const form = ref<HTMLFormElement>();
 const title = ref(props.element.data.title);
 
 watch(
+  () => props.element.data.title,
+  (value) => {
+    if (value === title.value) return;
+    title.value = value;
+  },
+);
+
+watch(
   title,
   debounce(async () => {
     if (!form.value) return;
