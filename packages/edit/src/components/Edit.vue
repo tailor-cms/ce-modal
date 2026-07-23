@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import { cloneDeep, isEmpty } from 'lodash-es';
 import { computed, inject } from 'vue';
-import manifest, { Element } from '@tailor-cms/ce-modal-manifest';
+import { Element } from '@tailor-cms/ce-modal-manifest';
 
 const emit = defineEmits<{
   save: [data: Element['data']];
