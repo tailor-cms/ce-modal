@@ -3,7 +3,6 @@
   <div class="tce-modal">
     <VAlert
       v-if="!hasElements"
-      color="primary-darken-1"
       icon="mdi-information-outline"
       variant="tonal"
       prominent
