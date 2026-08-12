@@ -1,4 +1,3 @@
-import { ai, initState, type } from '@tailor-cms/ce-modal-manifest';
 import type {
   BeforeDisplayHook,
   HookMap,
@@ -6,6 +5,7 @@ import type {
   ServerModule,
 } from '@tailor-cms/cek-common';
 import type { Element } from '@tailor-cms/ce-modal-manifest';
+import manifest from '@tailor-cms/ce-modal-manifest';
 
 const IS_CEK = process.env.CEK_RUNTIME;
 
@@ -29,13 +29,10 @@ export const hookMap: HookMap<Element> = new Map(
 );
 
 const serverModule: ServerModule<Element> = {
-  type,
-  initState,
+  ...manifest,
   hookMap,
   beforeDisplay,
   onUserInteraction,
-  ai,
 };
 
 export default serverModule;
-export { type, initState, ai };
