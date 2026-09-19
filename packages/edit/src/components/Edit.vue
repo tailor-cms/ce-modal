@@ -3,6 +3,7 @@
   <div class="tce-modal">
     <VAlert
       v-if="!hasElements"
+      class="text-center"
       icon="mdi-information-outline"
       variant="tonal"
       prominent
@@ -22,7 +23,7 @@
 
 <script lang="ts" setup>
 import { cloneDeep, isEmpty } from 'lodash-es';
-import { computed, inject } from 'vue';
+import { computed } from 'vue';
 import { Element } from '@tailor-cms/ce-modal-manifest';
 
 const emit = defineEmits<{
@@ -35,8 +36,6 @@ const props = defineProps<{
   isFocused: boolean;
   isReadonly: boolean;
 }>();
-
-const elementBus: any = inject('$elementBus');
 
 const saveEmbed = (embeds: any) => {
   const data = cloneDeep(props.element.data);
@@ -51,10 +50,6 @@ const deleteEmbed = (embed: { id: string }) => {
 };
 
 const hasElements = computed(() => !isEmpty(props.element.data.embeds));
-
-elementBus.on('title', (title: string) => {
-  emit('save', { ...props.element.data, title });
-});
 </script>
 
 <style scoped>
