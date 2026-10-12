@@ -18,23 +18,32 @@ test.describe('Initial render', () => {
     await expect(edit.emptyAlert).toBeVisible();
   });
 
-  test('Top toolbar exposes the button label input', async ({ page }) => {
+  test('Side toolbar exposes the button label input', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
     await expect(edit.buttonLabelInput).toBeVisible();
+    await expect(edit.topToolbar.getByLabel('Button label')).toHaveCount(0);
   });
 });
 
 test.describe('Button label', () => {
-  test('Persists label set via toolbar', async ({ page }) => {
+  test('Persists label set via side toolbar', async ({ page }) => {
     const edit = new Edit(page);
     await edit.focus();
-    await edit.buttonLabelInput.fill('Show details');
-    // Wait for the debounced save (500ms) to fire and persist
-    await page.waitForTimeout(700);
+    await edit.fillLabel('Show details');
     await page.reload({ waitUntil: 'networkidle' });
     await edit.focus();
     await expect(edit.buttonLabelInput).toHaveValue('Show details');
+  });
+
+  test('Label is optional and can be cleared', async ({ page }) => {
+    const edit = new Edit(page);
+    await edit.focus();
+    await edit.fillLabel('Show details');
+    await edit.fillLabel('');
+    await page.reload({ waitUntil: 'networkidle' });
+    await edit.focus();
+    await expect(edit.buttonLabelInput).toHaveValue('');
   });
 });
 
